@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
 import ProductList from './components/ProductList';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import queryString from 'query-string';
+import { useLocation } from 'react-router-dom';
 
 function App() {
   const initProducts = [
@@ -35,7 +37,16 @@ function App() {
     },
   ];
 
+  const location = useLocation();
   const [products, setProducts] = useState(initProducts);
+  const [filteredStatus, setFilteredStatus] = useState('all');
+
+  useEffect(() => {
+    const params = queryString.parse(location.search);
+    setFilteredStatus(params.status || "all");
+  }, [location.search]);
+
+  const renderProducts = products.filter((product) => filteredStatus === "all" || filteredStatus === product.status);
 
   const removeProduct = (id) => {
     console.log("Test: ", id);
@@ -48,7 +59,7 @@ function App() {
   return (
     <div className="App">
       <h1>Product Management</h1>
-      <ProductList products={products} removeProduct={removeProduct} />
+      <ProductList products={renderProducts} removeProduct={removeProduct} />
     </div>
   );
 }

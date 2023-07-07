@@ -4,6 +4,7 @@ import ProductList from './components/ProductList';
 import { useEffect, useState } from 'react';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
+import Header from './components/Header';
 
 function App() {
   const initProducts = [
@@ -58,6 +59,7 @@ function App() {
 
   return (
     <div className="App">
+      <Header />
       <h1>Product Management</h1>
       <ProductList products={renderProducts} removeProduct={removeProduct} />
     </div>

@@ -5,13 +5,19 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 
+const user = {
+  username: "John",
+}
+export const UserContext = React.createContext();
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-
+    <UserContext.Provider value={user}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </UserContext.Provider>
   </React.StrictMode>
 );
 

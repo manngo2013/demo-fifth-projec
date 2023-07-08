@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import Header from './components/Header';
+import SampleReactMemo from './components/SampleReactMemo';
 
 function App() {
   const initProducts = [
@@ -62,6 +63,8 @@ function App() {
       <Header />
       <h1>Product Management</h1>
       <ProductList products={renderProducts} removeProduct={removeProduct} />
+      <br />
+      <SampleReactMemo txt="number 1, number 2, number 3,..." />
     </div>
   );
 }

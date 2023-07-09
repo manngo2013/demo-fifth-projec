@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import ProductList from './components/ProductList';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import SampleReactMemo from './components/SampleReactMemo';
+import AddProduct from './components/AddProduct';
 
 function App() {
   const initProducts = [
@@ -58,10 +59,17 @@ function App() {
     setProducts(newProducts);
   }
 
+  const addNewProduct = useCallback((product) => {
+    // Get prev state of products then copy and push new product
+    // this.setState((prevState))
+    setProducts((products) => [...products, product]);
+  }, []);
+
   return (
     <div className="App">
       <Header />
       <h1>Product Management</h1>
+      <AddProduct addNewProduct={addNewProduct} />
       <ProductList products={renderProducts} removeProduct={removeProduct} />
       <br />
       <SampleReactMemo txt="number 1, number 2, number 3,..." />

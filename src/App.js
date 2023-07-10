@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import ProductList from './components/ProductList';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
 import Header from './components/Header';
@@ -65,6 +65,15 @@ function App() {
     setProducts((products) => [...products, product]);
   }, []);
 
+  const result = useMemo(() => {
+    console.log("Render loadingLargeData");
+    let sum = 0;
+    for (let i = 0; i < 1000000000; i++) {
+      sum += i;
+    }
+    return sum;
+  }, []);
+
   return (
     <div className="App">
       <Header />
@@ -73,6 +82,9 @@ function App() {
       <ProductList products={renderProducts} removeProduct={removeProduct} />
       <br />
       <SampleReactMemo txt="number 1, number 2, number 3,..." />
+      <div>
+        Demo calculate sum: {result}
+      </div>
     </div>
   );
 }

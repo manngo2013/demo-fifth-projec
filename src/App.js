@@ -7,6 +7,7 @@ import { useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import SampleReactMemo from './components/SampleReactMemo';
 import AddProduct from './components/AddProduct';
+import { useFetch } from './hooks/custom/useFetch';
 
 function App() {
   const initProducts = [
@@ -73,6 +74,10 @@ function App() {
     }
     return sum;
   }, []);
+
+  const [data] = useFetch("https://jsonplaceholder.typicode.com/todos");
+
+  console.log("Custom Hooks: ", data);
 
   return (
     <div className="App">
